@@ -1,0 +1,64 @@
+CARREGAR A IMAGEM ORIGINAL
+
+A função Image.open("simple_icon.png") da biblioteca PIL é usada para carregar uma imagem do disco. O arquivo "simple_icon.png" deve estar no mesmo diretório do script ou o caminho até ele deve ser especificado corretamente.
+ 
+
+img.show() exibe a imagem original. Isso permite que o usuário visualize a imagem antes das manipulações.
+
+-------------
+
+CONVERTER A IMAGEM EM DADOS BIINÁRIOS
+
+np.array(img) converte a imagem carregada em um array do NumPy. Esse array contém os valores dos pixels da imagem.
+ 
+
+img_data.tobytes() converte os dados do array NumPy em uma sequência binária. Esse é o formato que permite salvar a imagem em um arquivo binário diretamente.
+
+-------------
+
+SALVAR OS DADOS BINÁRIOS EM ARQUIVO
+
+Um arquivo chamado "original_img.bin" é criado e aberto no modo "wb" (write binary) para escrita binária.
+ 
+
+Os dados binários são escritos no arquivo usando file.write(binary_data).
+ O arquivo é fechado usando file.close().
+
+ ------------
+COPIAR O ARQUIVO BINÁRIOS
+
+O arquivo "original_img.bin" é aberto no modo "rb" (read binary) para leitura.
+ 
+
+Os dados binários são lidos do arquivo original usando original_file.read() e armazenados na variável data.
+ 
+
+Um novo arquivo chamado "copy_img.bin" é então aberto no modo "wb" e os dados lidos são escritos nele, efetivamente criando uma cópia do arquivo original.
+
+---------------
+
+MANIPULAR OS DADOS DO ARQUIVO BINÁRIO cópia
+
+O arquivo "copy_img.bin" é novamente aberto no modo "rb" para leitura dos dados binários.
+ 
+
+Os dados são lidos e convertidos para bytearray, permitindo a modificação dos bytes.
+
+ 
+
+Os bytes são invertidos (data[::-1]), uma forma simples de manipulação. Isso inverte a ordem dos bytes em todo o arquivo, o que provavelmente corromperá a imagem de uma maneira visualmente distinta.
+ 
+
+O arquivo é então aberto novamente no modo "wb" e os bytes modificados são escritos de volta ao arquivo.
+
+CARREGAR E MOSTRAR A IMAGEM MODIFICADA
+
+Os dados binários modificados são carregados de volta em um array NumPy com o mesmo formato e tipo de dados da imagem original usando np.frombuffer(data, dtype=np.uint8).reshape(img_data.shape).
+ 
+
+A imagem é reconstruída do array NumPy modificado usando Image.fromarray(modified_data).
+ 
+
+modified_img.show() exibe a imagem resultante, que agora reflete as modificações feitas nos dados binários.
+
+--------------- 
